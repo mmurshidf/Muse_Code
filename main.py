@@ -4,6 +4,7 @@ import random
 
 pygame.init()
 pygame.display.set_caption('Muse')
+
 #Variables
 Width = 500
 Height = 700
@@ -19,12 +20,10 @@ Player_size = pygame.transform.scale(Player, (Player_w, Player_h))
 Asteroids = pygame.image.load(os.path.join('Asteroids.png'))
 Asteroids_size = pygame.transform.scale(Asteroids, (Asteroids_w, Asteroids_h))
 White = (255, 255, 255)
-Black = (0, 0, 0)
 background = pygame.transform.scale(pygame.image.load(os.path.join('sky.png')), (Width,Height))
-Bullet_hit = pygame.USEREVENT + 1
 
 #Functions
-def display(player_main, bullets, rocks, enemy, text, textRect, text2, textRect2):
+def display(player_main, bullets, rocks, enemy, text, textRect, text2, textRect2, text3, textRect3, Lives):
     Screen.blit(background, (0,0))
 
     for bulletshape in bullets:
@@ -35,9 +34,11 @@ def display(player_main, bullets, rocks, enemy, text, textRect, text2, textRect2
         Screen.blit(Asteroids_size, (enemy.x - 22, enemy.y - 25))
 
     Screen.blit(Player_size, (player_main.x, player_main.y))
-    
     Screen.blit(text, textRect)
     Screen.blit(text2, textRect2)
+
+    if Lives == 0:
+        Screen.blit(text3, textRect3)
 
     pygame.display.update()
 
@@ -68,6 +69,16 @@ def main():
     lost = False
     lost_count = 0
     enemy = pygame.Rect(random.randrange(50, Width-100), random.randrange(-500, -100), 5, 10)
+    font2 = pygame.font.Font('Spy Agency.ttf', 8)
+    text3 = font2.render('Developed By: Mohammed Faizan Murshid - @moham.Faizann', True, (255, 255, 255, 255))
+    textRect3 = text3.get_rect()
+    textRect3.center = (Width // 2, 650)
+    Te = Score
+    He = str(Te)
+    font = pygame.font.Font('Spy Agency.ttf', 32)
+    text2 = font.render('Score:' + He, True, (255, 255, 255, 255))
+    textRect2 = text2.get_rect()
+    textRect2.center = (410,30)
     
     def Asteroid_movement(rocks):
         for enemy in rocks:
@@ -76,14 +87,7 @@ def main():
     run = True
     while run:
         FPS.tick(60)
-
         for event in pygame.event.get():
-            Te = Level
-            He = str(Te)
-            font = pygame.font.Font('Spy Agency.ttf', 32)
-            text2 = font.render('Score:' + He, True, (255, 255, 255, 255))
-            textRect2 = text2.get_rect()
-            textRect2.center = (410,30)
             if event.type == pygame.QUIT:
                 run = False
 
@@ -142,6 +146,9 @@ def main():
                 text2 = font.render('Score:' + De, True, (255, 255, 255, 255))
                 textRect2 = text2.get_rect()
                 textRect2.center = (Width // 2, Height // 2)
+                text3 = font2.render('Developed By: Mohammed Faizan Murshid - @moham.Faizann', True, (255, 255, 255, 255))
+                textRect3 = text3.get_rect()
+                textRect3.center = (Width // 2, 650)
             if (lost == True) and (lost_count == 300):
                 run = False
 
@@ -150,7 +157,7 @@ def main():
         bullet_movement(bullets)
         Asteroid_movement(rocks)
         Screen.fill(0)
-        display(player_main, bullets, rocks, enemy, text, textRect, text2, textRect2)
+        display(player_main, bullets, rocks, enemy, text, textRect, text2, textRect2, text3, textRect3, Lives)
 
     pygame.quit()
 
