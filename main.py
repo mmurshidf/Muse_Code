@@ -1,28 +1,32 @@
 import pygame
 import os
+import random
 
 #Variables
 Width = 500
 Height = 700
 Win = pygame.display.set_mode((Width,Height))
-Player_w = 33
-Player_h = 33
+Player_w = 44
+Player_h = 44
 Vel = 5
 Bullet_vel = 6
-Player = pygame.image.load(os.path.join('Ria.png'))
+Player = pygame.image.load(os.path.join('gun.png'))
 Player_size = pygame.transform.scale(Player, (Player_w, Player_h))
 White = (255, 255, 255)
-background = pygame.transform.scale(pygame.image.load(os.path.join('sky1.png')), (Width,Height))
+background = pygame.transform.scale(pygame.image.load(os.path.join('sky.png')), (Width,Height))
 
 #Functions
 def display(player_main, bullets):
     Win.blit(background, (0,0))
+
     for bulletshape in bullets:
         pygame.draw.rect(Win, White, bulletshape)
+
 
     Win.blit(Player_size, (player_main.x, player_main.y))
     
     pygame.display.update()
+
 
 def movement(Keys, player_main):
     if Keys[pygame.K_a] and player_main.x - Vel > 0:
