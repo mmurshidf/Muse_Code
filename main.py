@@ -1,11 +1,18 @@
 import pygame
 import os
 import random
-
+from pygame import mixer
 pygame.init()
+
+mixer.music.load('background.wav')
+mixer.music.play(-1)
+
+
 pygame.display.set_caption('Muse')
 
 #Variables
+collision = mixer.Sound('explosion.wav')
+sound = mixer.Sound('laser.wav')
 Width = 500
 Height = 700
 Screen = pygame.display.set_mode((Width,Height))
@@ -31,7 +38,7 @@ def display(player_main, bullets, rocks, enemy, text, textRect, text2, textRect2
     
     for enemy in rocks:
         pygame.draw.rect(Screen, White, enemy)
-        Screen.blit(Asteroids_size, (enemy.x - 22, enemy.y - 25))
+        Screen.blit(Asteroids_size, (enemy.x - 27, enemy.y - 25))
 
     Screen.blit(Player_size, (player_main.x, player_main.y))
     Screen.blit(text, textRect)
@@ -69,6 +76,7 @@ def main():
     lost = False
     lost_count = 0
     enemy = pygame.Rect(random.randrange(50, Width-100), random.randrange(-500, -100), 5, 10)
+
     font2 = pygame.font.Font('Spy Agency.ttf', 8)
     text3 = font2.render('Developed By: Mohammed Faizan Murshid - @moham.Faizann', True, (255, 255, 255, 255))
     textRect3 = text3.get_rect()
@@ -94,7 +102,7 @@ def main():
             if len(rocks) == 0:
                 Level += 1
                 for i in range(wave_length):
-                    enemy = pygame.Rect(random.randrange(50, Width-100), random.randrange(-500, -100), 25, 25)
+                    enemy = pygame.Rect(random.randrange(50, Width-100), random.randrange(-500, -100), 26, 25)
                     rocks.append(enemy)
                     Screen.blit(Asteroids_size, (enemy.x, enemy.y))
                 Asteroid_movement(rocks)
@@ -103,6 +111,7 @@ def main():
                 if event.key == pygame.K_SPACE:
                     bulletshape = pygame.Rect(player_main.x + player_main.width // 2, player_main.y - player_main.height // 2, 5, 10)
                     bullets.append(bulletshape)
+                    sound.play()
 
         for bulletshape in bullets:
             if bulletshape.y + 680  < Height:
@@ -122,7 +131,7 @@ def main():
                         bullets.remove(bulletshape)
                     if enemy in rocks:
                         rocks.remove(enemy)
-
+                        collision.play()
                     Score += 1
 
         for enemy in rocks:
