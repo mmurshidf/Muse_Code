@@ -4,15 +4,15 @@ import random
 from pygame import mixer
 pygame.init()
 
-mixer.music.load('Background_song.wav')
+mixer.music.load('Data/Background_song.wav')
 mixer.music.play(-1)
 
 
 pygame.display.set_caption('Muse')
 
 #Variables
-collision = mixer.Sound('Explosion_b.wav')
-sound = mixer.Sound('Bullet.wav')
+collision = mixer.Sound('Data/Explosion_b.wav')
+sound = mixer.Sound('Data/Bullet.wav')
 Width = 500
 Height = 700
 Screen = pygame.display.set_mode((Width,Height))
@@ -22,12 +22,12 @@ Asteroids_w = 90
 Asteroids_h = 90
 Vel = 5
 Bullet_vel = 6
-Player = pygame.image.load(os.path.join('gun.png'))
+Player = pygame.image.load(os.path.join('Data/gun.png'))
 Player_size = pygame.transform.scale(Player, (Player_w, Player_h))
-Asteroids = pygame.image.load(os.path.join('Asteroids.png'))
+Asteroids = pygame.image.load(os.path.join('Data/Asteroids.png'))
 Asteroids_size = pygame.transform.scale(Asteroids, (Asteroids_w, Asteroids_h))
 White = (255, 255, 255)
-background = pygame.transform.scale(pygame.image.load(os.path.join('sky.png')), (Width,Height))
+background = pygame.transform.scale(pygame.image.load(os.path.join('Data/sky.png')), (Width,Height))
 
 #Functions
 def display(player_main, bullets, rocks, enemy, text, textRect, text2, textRect2, text3, textRect3, Lives):
@@ -77,13 +77,13 @@ def main():
     lost_count = 0
     enemy = pygame.Rect(random.randrange(50, Width-100), random.randrange(-500, -100), 5, 10)
 
-    font2 = pygame.font.Font('Spy Agency.ttf', 8)
+    font2 = pygame.font.Font('Data/Spy Agency.ttf', 8)
     text3 = font2.render('Developed By: Mohammed Faizan Murshid - @moham.Faizann', True, (255, 255, 255, 255))
     textRect3 = text3.get_rect()
     textRect3.center = (Width // 2, 650)
     Te = Score
     He = str(Te)
-    font = pygame.font.Font('Spy Agency.ttf', 32)
+    font = pygame.font.Font('Data/Spy Agency.ttf', 32)
     text2 = font.render('Score:' + He, True, (255, 255, 255, 255))
     textRect2 = text2.get_rect()
     textRect2.center = (410,30)
@@ -121,7 +121,7 @@ def main():
             for enemy in rocks:
                 Te = Score
                 He = str(Te)
-                font = pygame.font.Font('Spy Agency.ttf', 32)
+                font = pygame.font.Font('Data/Spy Agency.ttf', 32)
                 text2 = font.render('Score:' + He, True, (255, 255, 255, 255))
                 textRect2 = text2.get_rect()
                 textRect2.center = (410,30)
@@ -137,7 +137,7 @@ def main():
         for enemy in rocks:
             Xe = Lives
             Ye = str(Xe)
-            font = pygame.font.Font('Spy Agency.ttf', 32)
+            font = pygame.font.Font('Data/Spy Agency.ttf', 32)
             text = font.render('Lives:' + Ye, True, (255, 255, 255, 255))
             textRect = text.get_rect()
             textRect.center = (80,30)
@@ -151,7 +151,7 @@ def main():
                 lost_count += 1
                 Be = Score
                 De = str(Be)
-                font = pygame.font.Font('Spy Agency.ttf', 32)
+                font = pygame.font.Font('Data/Spy Agency.ttf', 32)
                 text2 = font.render('Score:' + De, True, (255, 255, 255, 255))
                 textRect2 = text2.get_rect()
                 textRect2.center = (Width // 2, Height // 2)
