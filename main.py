@@ -4,15 +4,15 @@ import random
 from pygame import mixer
 pygame.init()
 
-mixer.music.load('background.wav')
+mixer.music.load('Background_song.wav')
 mixer.music.play(-1)
 
 
 pygame.display.set_caption('Muse')
 
 #Variables
-collision = mixer.Sound('explosion.wav')
-sound = mixer.Sound('laser.wav')
+collision = mixer.Sound('Explosion_b.wav')
+sound = mixer.Sound('Bullet.wav')
 Width = 500
 Height = 700
 Screen = pygame.display.set_mode((Width,Height))
